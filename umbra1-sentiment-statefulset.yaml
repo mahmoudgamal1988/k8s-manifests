@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: umbra1-sentiment-statefulset
+  labels:
+    app: umbra1-sentiment
+spec:
+  serviceName: "umbra1-sentiment-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: umbra1-sentiment
+  template:
+    metadata:
+      labels:
+        app: umbra1-sentiment
+    spec:
+      containers:
+      - name: umbra1-sentiment-container
+        image: mohamedzahran1989/umbra1_sentiment:latest
+      nodeSelector:
+        kubernetes.io/hostname: avatars-worker-11
+      tolerations: []  # Assuming no specific tolerations needed for worker nodes

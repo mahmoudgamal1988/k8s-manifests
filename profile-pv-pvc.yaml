@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: profile-pv
+spec:
+  capacity:
+    storage: 77000Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  nfs:
+    path: /mnt/nfs/profile_data
+    server: 172.17.6.50
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: profile-pvc
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 77000Gi

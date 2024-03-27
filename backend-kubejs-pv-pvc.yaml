@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: backend-kubejs-code-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: /mnt/nfs/kube-js
+    server: 172.17.6.50
+  
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backend-kubejs-code-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

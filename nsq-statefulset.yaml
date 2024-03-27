@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nsq-statefulset
+  labels:
+    app: nsq
+spec:
+  serviceName: "nsq-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nsq
+  template:
+    metadata:
+      labels:
+        app: nsq
+    spec:
+      containers:
+      - name: nsq
+        image: nsqio/nsq:latest
+        command: ["/nsqd"]
+        ports:
+        - name: nsqd-tcp
+          containerPort: 4150
+        - name: nsqd-http
+          containerPort: 4151
+        - name: nsqd-look
+          containerPort: 4161
+        volumeMounts:
+        - name: nsq-storage
+          mountPath: /data
+      volumes:
+      - name: nsq-storage
+        persistentVolumeClaim:
+          claimName: nsq-pv
+      nodeSelector:
+        kubernetes.io/hostname: avatars-worker-11
+      tolerations: [] # Removing control-plane tolerations for the worker node scheduling

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: engine-clusterip-service
+  labels:
+    app: engine
+spec:
+  type: ClusterIP
+  selector:
+    app: engine  # Ensure this matches the labels of your StatefulSet pods
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  - name: ssl
+    port: 443
+    targetPort: 443

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pdfconverter-statefulset
+  labels:
+    app: pdfconverter
+spec:
+  serviceName: "pdfconverter-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pdfconverter
+  template:
+    metadata:
+      labels:
+        app: pdfconverter
+    spec:
+      containers:
+      - name: pdfconverter-container
+        image: mohamedzahran1989/pdfconverter:2.5
+      nodeSelector:
+        kubernetes.io/hostname: avatars-worker-11
+      tolerations: []  # Assuming no specific tolerations needed for worker nodes

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-nodeport  # New service name
+  labels:
+    app: backend
+spec:
+  type: NodePort
+  selector:
+    app: backend  # Ensure this matches the labels of the pods in the StatefulSet
+  ports:
+    - name: backend-port
+      protocol: TCP
+      port: 3030
+      targetPort: 3030
+    - name: backend-https
+      protocol: TCP
+      port: 443
+      targetPort: 443

@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: backend-statefulset
+  labels:
+    app: backend
+spec:
+  serviceName: "backend-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: mohamedzahran1989/python-nodejs:python3.8-nodejs14
+        workingDir: /server
+        ports:
+        - name: backend-port
+          containerPort: 3030
+        - name: bind-https-port
+          containerPort: 443
+        env:
+        - name: MONGO_DB_URL
+          value: "mongodb://mongodb-service.default.svc.cluster.local:27017/ueyedata"
+        - name: NSQ_HOST
+          value: "nsq-service.default.svc.cluster.local"
+        - name: NSQ_TCP_PORT
+          value: "4150"
+        - name: LOGGING_LEVEL
+          value: "verbose"
+        - name: ACCESS_LOG
+          value: "true"
+        - name: SSL
+          value: "true"
+        - name: LOG_CONTEXT
+          value: "false"
+        - name: SENTIMENT_SERVER
+          value: "http://umbra1-sentiment-service.default.svc.cluster.local:5000/get_sentiment"
+        - name: CONTAINER_NAME
+          value: "backend-service-clusterip.default.svc.cluster.local"
+        - name: worker_node
+          value: "172.17.6.32"
+        - name: SUPPORTED_LANGUAGES
+          value: "en, ar"
+        - name: VENDOR
+          value: "octaeye"
+        - name: DOCX_CONVERTER_SERVER
+          value: "http://pdfconverter-service.default.svc.cluster.local:3032"
+        - name: SOCIAL_ANALYTICS_API_ID
+          value: "1001_O"
+        - name: SOCIAL_ANALYTICS_API_KEY
+          value: "999hgXppWUlouwasIGLpWiuR+TkctVkLyI3WarMF0bA="
+        - name: SOCIAL_ANALYTICS_URL
+          value: "https://umbrasys.ddns.net:3035"
+        - name: FB_DATA_SEARCH_API_ID
+          value: "1001_O"
+        - name: FB_DATA_SEARCH_API_KEY
+          value: "999hgXppWUlouwasIGLpWiuR+TkctVkLyI3WarMF0bA="
+        - name: FB_DATA_SEARCH_URL
+          value: "https://umbrasys.ddns.net:3036"
+        - name: FB_DATA_SEARCH_COUNTRIES
+          value: "Egypt"
+        - name: TRENDING_SEARCH_API_ID
+          value: "1001_O"
+        - name: TRENDING_SEARCH_API_KEY
+          value: "999hgXppWUlouwasIGLpWiuR+TkctVkLyI3WarMF0bA="
+        - name: TRENDING_SEARCH_URL
+          value: "https://umbrasys.ddns.net:3037"
+        - name: APP2FACTOR_AUTH_URL
+          value: "http://umbrasys.ddns.net:5100/api/auth_code/"
+        - name: disable_nsq
+          value: "false"
+        - name: USE_LOCK_ACCOUNTS_ALGORITHM
+          value: "true"
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - name: backend-code-volume
+          mountPath: "/server"
+        command: ["yarn", "start"]
+      volumes:
+      - name: backend-code-volume
+        persistentVolumeClaim:
+          claimName: backend-code-pvc
+      nodeSelector:
+        kubernetes.io/hostname: avatars-worker-11
+      tolerations:  # This section is what you add for the toleration
+      - key: "key"
+        operator: "Equal"
+        value: "value"
+        effect: "NoSchedule"
+      imagePullSecrets:
+      - name: myregistrykey

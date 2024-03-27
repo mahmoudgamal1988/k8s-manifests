@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nsq-service
+  labels:
+    app: nsq
+spec:
+  type: ClusterIP
+  selector:
+    app: nsq
+  ports:
+  - name: nsqd-tcp
+    protocol: TCP
+    port: 4150
+    targetPort: 4150
+  - name: nsqd-http
+    protocol: TCP
+    port: 4151
+    targetPort: 4151
+  - name: nsqd-look
+    protocol: TCP
+    port: 4161
