@@ -35,4 +35,8 @@ spec:
           claimName: nsq-pv
       nodeSelector:
         kubernetes.io/hostname: avatars-worker-11
-      tolerations: [] # Removing control-plane tolerations for the worker node scheduling
+      tolerations:  # This section is what you add for the toleration
+      - key: "key"
+        operator: "Equal"
+        value: "value"
+        effect: "NoSchedule"
