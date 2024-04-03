@@ -6,7 +6,7 @@ metadata:
     app: engine
 spec:
   serviceName: "engine-clusterip-service"
-  replicas: 600
+  replicas: 500
   selector:
     matchLabels:
       app: engine
@@ -47,6 +47,7 @@ spec:
       - name: profile-volume
         persistentVolumeClaim:
           claimName: profile-pvc
+  podManagementPolicy: "Parallel"  # Correct location for podManagementPolicy
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
