@@ -9,15 +9,15 @@ spec:
   replicas: 500
   selector:
     matchLabels:
-      app: engine
+      app: youtube
   template:
     metadata:
       labels:
-        app: engine
+        app: youtube
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: engine
+      - name: youtube
         image: mohamedzahran1989/um_co:latest
         ports:
         - containerPort: 80
@@ -31,7 +31,7 @@ spec:
         - name: SSL_PORT
           value: "443"
         volumeMounts:
-        - name: nfs-code-volume
+        - name: youtube-code-volume
           mountPath: /usr/local/bin/codes
         - name: logs-volume
           mountPath: /usr/local/bin/logs
