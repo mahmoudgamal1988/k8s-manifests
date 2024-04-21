@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-python-deployment
+  labels:
+    app: kube-python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-python
+  template:
+    metadata:
+      labels:
+        app: kube-python
+    spec:
+      containers:
+      - name: kube-python
+        image: mohamedzahran1989/kpythonnew:new9
+        imagePullPolicy: Always
+        env:
+        - name: NFS_SERVER_IP
+          value: "192.168.10.10"  # Replace with your NFS server IP
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+        - name: nfs-storage
+          mountPath: /app/nfs
+      volumes:
+      - name: data-volume
+        hostPath:
+          path: /data 
+          type: DirectoryOrCreate
+      - name: nfs-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc
+      # nodeSelector:
+      #   kubernetes.io/hostname: avatars-worker-11
+      # tolerations:  # This section is what you add for the toleration
+      # - key: "key"
+      #   operator: "Equal"
+      #   value: "value"
+      #   effect: "NoSchedule"
+      # imagePullSecrets:
+      # - name: myregistrykey
