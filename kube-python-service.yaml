@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-python-service-cluster
+spec:
+  selector:
+    app: kube-python
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
