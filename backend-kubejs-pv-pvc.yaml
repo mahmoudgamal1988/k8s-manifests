@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   nfs:
     path: /mnt/nfs/kube-js
-    server: 172.17.6.50
+    server: 192.168.10.10
   
 ---
 apiVersion: v1
