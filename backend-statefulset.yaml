@@ -89,12 +89,12 @@ spec:
       - name: backend-code-volume
         persistentVolumeClaim:
           claimName: backend-code-pvc
-      nodeSelector:
-        kubernetes.io/hostname: avatars-worker-11
-      tolerations:  # This section is what you add for the toleration
-      - key: "key"
-        operator: "Equal"
-        value: "value"
-        effect: "NoSchedule"
-      imagePullSecrets:
-      - name: myregistrykey
+      # nodeSelector:
+      #   kubernetes.io/hostname: avatars-worker-11
+      # tolerations:  # This section is what you add for the toleration
+      # - key: "key"
+      #   operator: "Equal"
+      #   value: "value"
+      #   effect: "NoSchedule"
+      # imagePullSecrets:
+      # - name: myregistrykey
