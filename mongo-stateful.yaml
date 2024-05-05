@@ -26,12 +26,12 @@ spec:
         volumeMounts:
         - name: db-storage
           mountPath: /data/db
-      nodeSelector:
-        kubernetes.io/hostname: avatars-worker-11
-      tolerations:  # This section is what you add for the toleration
-      - key: "key"
-        operator: "Equal"
-        value: "value"
+      # nodeSelector:
+      #   kubernetes.io/hostname: avatars-worker-11
+      # tolerations:  # This section is what you add for the toleration
+      # - key: "key"
+      #   operator: "Equal"
+      #   value: "value"
         effect: "NoSchedule"
       volumes:
       - name: db-storage
