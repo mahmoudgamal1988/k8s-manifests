@@ -18,6 +18,6 @@ spec:
       containers:
       - name: pdfconverter-container
         image: mohamedzahran1989/pdfconverter:2.5
-      nodeSelector:
-        kubernetes.io/hostname: avatars-worker-11
-      tolerations: []  # Assuming no specific tolerations needed for worker nodes
+      # nodeSelector:
+      #   kubernetes.io/hostname: avatars-worker-11
+      # tolerations: []  # Assuming no specific tolerations needed for worker nodes
