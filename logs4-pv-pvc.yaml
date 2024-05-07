@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: logs4-pv
+spec:
+  capacity:
+    storage: 7700Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  nfs:
+    path: /mnt/nfs/logs
+    server: 10.10.1.50
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: logs4-pvc
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 7700Gi
