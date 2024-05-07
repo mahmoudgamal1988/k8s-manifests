@@ -6,7 +6,7 @@ metadata:
     app: youtube3
 spec:
   serviceName: "youtube3-clusterip-service"
-  replicas: 500
+  replicas: 100
   selector:
     matchLabels:
       app: youtube3
@@ -16,6 +16,8 @@ spec:
         app: youtube3
     spec:
       terminationGracePeriodSeconds: 10
+      nodeSelector:
+        youtube-node: "true"
       containers:
       - name: youtube3
         image: mohamedzahran1989/um_co:update
