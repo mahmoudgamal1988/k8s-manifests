@@ -6,7 +6,7 @@ metadata:
     app: youtube4
 spec:
   serviceName: "youtube4-clusterip-service"
-  replicas: 500
+  replicas: 100
   selector:
     matchLabels:
       app: youtube4
@@ -16,6 +16,8 @@ spec:
         app: youtube4
     spec:
       terminationGracePeriodSeconds: 10
+      nodeSelector:
+        youtube-node: "true"
       containers:
       - name: youtube4
         image: mohamedzahran1989/um_co:update
