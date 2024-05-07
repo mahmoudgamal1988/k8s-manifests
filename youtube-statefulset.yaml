@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: youtube
-        image: mohamedzahran1989/um_co:latest
+        image: mohamedzahran1989/um_co:update
         ports:
         - containerPort: 80
         env:
