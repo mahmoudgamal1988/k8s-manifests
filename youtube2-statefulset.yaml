@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: youtube2-statefulset
+  labels:
+    app: youtube
+spec:
+  serviceName: "youtube2-clusterip-service"
+  replicas: 500
+  selector:
+    matchLabels:
+      app: youtube2
+  template:
+    metadata:
+      labels:
+        app: youtube2
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: youtube2
+        image: mohamedzahran1989/um_co:update
+        ports:
+        - containerPort: 80
+        env:
+        - name: backend_domain
+          value: "https://backend-service-clusterip.default.svc.cluster.local:3030"
+        - name: containerName
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SSL_PORT
+          value: "443"
+        volumeMounts:
+        - name: youtube2-code-volume
+          mountPath: /usr/local/bin/codes
+        - name: logs2-volume
+          mountPath: /usr/local/bin/logs
+        - name: profile2-volume
+          mountPath: /usr/local/bin/actions
+      volumes:
+      - name: youtube2-code-volume
+        persistentVolumeClaim:
+          claimName: youtube2-code-pvc
+      - name: logs2-volume
+        persistentVolumeClaim:
+          claimName: logs2-pvc
+      - name: profile2-volume
+        persistentVolumeClaim:
+          claimName: profile2-pvc
+  podManagementPolicy: "Parallel"  # Correct location for podManagementPolicy
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+      maxUnavailable: 500  # Set this to the maximum you can afford to have unavailable to increase rollout speed
