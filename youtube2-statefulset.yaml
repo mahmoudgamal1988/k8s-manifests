@@ -6,7 +6,7 @@ metadata:
     app: youtube2
 spec:
   serviceName: "youtube2-clusterip-service"
-  replicas: 500
+  replicas: 100
   selector:
     matchLabels:
       app: youtube2
