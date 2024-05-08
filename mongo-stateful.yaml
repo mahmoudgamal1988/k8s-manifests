@@ -32,7 +32,7 @@ spec:
       # - key: "key"
       #   operator: "Equal"
       #   value: "value"
-        effect: "NoSchedule"
+       # effect: "NoSchedule"
       volumes:
       - name: db-storage
         persistentVolumeClaim:
