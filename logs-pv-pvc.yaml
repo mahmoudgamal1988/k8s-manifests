@@ -11,7 +11,7 @@ spec:
   storageClassName: nfs
   nfs:
     path: /mnt/nfs/logs
-    server: 172.31.71.217
+    server: 172.31.34.159
 
 ---
 
