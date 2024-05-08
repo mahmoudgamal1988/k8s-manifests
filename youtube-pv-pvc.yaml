@@ -11,7 +11,7 @@ spec:
   storageClassName: nfs
   nfs:
     path: /mnt/nfs/code/Youtube_Controlling
-    server: 172.31.71.217
+    server: 172.31.34.159
 
 ---
 
