@@ -6,7 +6,7 @@ metadata:
     app: engine
 spec:
   serviceName: "engine-clusterip-service"
-  replicas: 500
+  replicas: 5
   selector:
     matchLabels:
       app: engine
