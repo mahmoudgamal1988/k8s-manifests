@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: NFS_SERVER_IP
-          value: "192.168.10.10"  # Replace with your NFS server IP
+          value: "192.168.10.7"  # Replace with your NFS server IP
         ports:
         - containerPort: 5000
         volumeMounts:
