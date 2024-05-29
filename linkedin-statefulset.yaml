@@ -5,7 +5,7 @@ metadata:
   labels:
     app: youtube
 spec:
-  serviceName: "engine-clusterip-service"
+  serviceName: "linkedin-clusterip-service"
   replicas: 100
   selector:
     matchLabels:
