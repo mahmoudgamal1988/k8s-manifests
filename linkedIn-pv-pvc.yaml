@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: linkedin-code-pv
+spec:
+  capacity:
+    storage: 7700Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  nfs:
+    path: /mnt/nfs/code/LinkedIn_Controlling
+    server: 192.168.10.7
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: linkedin-code-pvc
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 7700Gi
