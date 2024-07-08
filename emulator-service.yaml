@@ -11,4 +11,4 @@ spec:
   - port: 5900
     name: vnc
   - port: 6080
-    name: noVNC
+    name: novnc
