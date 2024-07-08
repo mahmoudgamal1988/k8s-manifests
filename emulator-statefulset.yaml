@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: android-service
+spec:
+  serviceName: "android-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: android
+  template:
+    metadata:
+      labels:
+        app: android
+    spec:
+      containers:
+      - name: android
+        image: mohamedzahran1989/android-emulator:v1
+        ports:
+        - containerPort: 4725
+          name: appium
+        - containerPort: 5900
+          name: vnc
+        - containerPort: 6080
+          name: noVNC
+        env:
+        - name: APPIUM_PORT
+          value: "4725"
+        - name: HTTP_PROXY
+          value: "http://your_proxy_server:your_proxy_port"
+        - name: HTTPS_PROXY
+          value: "https://your_proxy_server:your_proxy_port"
+        - name: backend_domain
+          value: "https://backend-service-clusterip.default.svc.cluster.local:3030"
+        - name: containerName
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: SSL_PORT
+          value: "443"
+        volumeMounts:
+        - name: nfs-code-volume
+          mountPath: /usr/local/bin/codes
+        - name: logs-volume
+          mountPath: /usr/local/bin/logs
+        - name: profile-volume
+          mountPath: /usr/local/bin/actions
+        - name: android-data
+          mountPath: /root/.android
+        - name: avd-data
+          mountPath: /root/.android/avd
+        securityContext:
+          privileged: true
+        tty: true
+        stdin_open: true
+      volumes:
+      - name: nfs-code-volume
+        persistentVolumeClaim:
+          claimName: nfs-code-pvc
+      - name: logs-volume
+        persistentVolumeClaim:
+          claimName: logs-pvc
+      - name: profile-volume
+        persistentVolumeClaim:
+          claimName: profile-pvc
+      - name: android-data
+        emptyDir: {}
+      - name: avd-data
+        emptyDir: {}
+  podManagementPolicy: "Parallel"
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+      maxUnavailable: 500
