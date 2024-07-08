@@ -51,8 +51,6 @@ spec:
           mountPath: /root/.android/avd
         securityContext:
           privileged: true
-        tty: true
-        stdin_open: true
       volumes:
       - name: nfs-code-volume
         persistentVolumeClaim:
