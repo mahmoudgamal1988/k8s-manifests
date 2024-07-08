@@ -22,7 +22,7 @@ spec:
         - containerPort: 5900
           name: vnc
         - containerPort: 6080
-          name: noVNC
+          name: novnc
         env:
         - name: APPIUM_PORT
           value: "4725"
