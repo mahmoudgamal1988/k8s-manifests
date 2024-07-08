@@ -39,11 +39,11 @@ spec:
         - name: SSL_PORT
           value: "443"
         volumeMounts:
-        - name: nfs-code-volume
+        - name: emulator-code-volume
           mountPath: /usr/local/bin/codes
-        - name: logs-volume
+        - name: emulator-logs-volume
           mountPath: /usr/local/bin/logs
-        - name: profile-volume
+        - name: emulator-profile-volume
           mountPath: /usr/local/bin/actions
         - name: android-data
           mountPath: /root/.android
@@ -52,15 +52,15 @@ spec:
         securityContext:
           privileged: true
       volumes:
-      - name: nfs-code-volume
+      - name: emulator-code-volume
         persistentVolumeClaim:
-          claimName: nfs-code-pvc
-      - name: logs-volume
+          claimName: emulator-code-pvc
+      - name: emulator-logs-volume
         persistentVolumeClaim:
-          claimName: logs-pvc
-      - name: profile-volume
+          claimName: emulator-logs-pvc
+      - name: emulator-profile-volume
         persistentVolumeClaim:
-          claimName: profile-pvc
+          claimName: emulator-profile-pvc
       - name: android-data
         emptyDir: {}
       - name: avd-data
