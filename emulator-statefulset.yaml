@@ -27,9 +27,9 @@ spec:
         - name: APPIUM_PORT
           value: "4725"
         - name: HTTP_PROXY
-          value: "http://your_proxy_server:your_proxy_port"
+          value: "http://glidersilage:EvaS456789@41.223.53.14:13129"
         - name: HTTPS_PROXY
-          value: "https://your_proxy_server:your_proxy_port"
+          value: "http://glidersilage:EvaS456789@41.223.53.14:13129"
         - name: backend_domain
           value: "https://backend-service-clusterip.default.svc.cluster.local:3030"
         - name: containerName
