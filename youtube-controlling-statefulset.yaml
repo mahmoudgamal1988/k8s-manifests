@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: youtube-statefulset
+  name: youtube-controlling-statefulset
   labels:
     app: youtube
 spec:
