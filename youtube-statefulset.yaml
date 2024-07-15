@@ -37,6 +37,8 @@ spec:
           mountPath: /usr/local/bin/logs
         - name: profile-volume
           mountPath: /usr/local/bin/actions
+        - name: screenshots-volume
+          mountPath: /usr/local/bin/screenshots
       volumes:
       - name: youtube-code-volume
         persistentVolumeClaim:
@@ -47,6 +49,9 @@ spec:
       - name: profile-volume
         persistentVolumeClaim:
           claimName: profile-pvc
+      - name: screenshots-volume
+        persistentVolumeClaim:
+          claimName: repos-pvc
   podManagementPolicy: "Parallel"  # Correct location for podManagementPolicy
   updateStrategy:
     type: RollingUpdate
