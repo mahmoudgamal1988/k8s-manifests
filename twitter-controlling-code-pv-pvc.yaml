@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: twitter-controlling-code-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /mnt/nfs/code/Twitter_Controlling
+    server: 192.168.10.7
+
+----------
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: twitter-controlling-code-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: twitter-controlling-code-pv
