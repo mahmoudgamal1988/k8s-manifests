@@ -26,6 +26,8 @@ spec:
         volumeMounts:
         - name: db-storage
           mountPath: /data/db
+        - name: db-backup-storage
+          mountPath: /backup
       # nodeSelector:
       #   kubernetes.io/hostname: avatars-worker-11
       # tolerations:  # This section is what you add for the toleration
@@ -37,3 +39,6 @@ spec:
       - name: db-storage
         persistentVolumeClaim:
           claimName: db-pvc
+      - name: db-backup-storage
+        persistentVolumeClaim:
+          claimName: db-backup-pvc
