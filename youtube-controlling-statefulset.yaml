@@ -16,6 +16,8 @@ spec:
         app: youtube
     spec:
       terminationGracePeriodSeconds: 10
+      nodeSelector:
+        youtube-node: "true"
       containers:
       - name: youtube
         image: mohamedzahran1989/um_co:update
