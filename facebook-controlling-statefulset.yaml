@@ -16,6 +16,8 @@ spec:
         app: engine
     spec:
       terminationGracePeriodSeconds: 10
+      nodeSelector:
+        engine-node: "true"
       containers:
       - name: engine
         image: mohamedzahran1989/umbra1:v1.1
