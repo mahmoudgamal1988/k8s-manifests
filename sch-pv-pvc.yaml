@@ -10,7 +10,7 @@ spec:
     - ReadWriteOnce
   nfs:
     path: /mnt/nfs/server
-    server: 172.31.29.67
+    server: 172.31.24.178
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
