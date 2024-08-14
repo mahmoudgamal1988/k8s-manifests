@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /mnt/nfs/code
+    path: /mnt/nfs/code/Twitter_Controlling_Emulator
     server: 172.31.29.67
 
 ---
