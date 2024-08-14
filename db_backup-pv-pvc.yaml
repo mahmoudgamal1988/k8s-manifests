@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   nfs:
     path: /mnt/nfs/mongo-backup
-    server: 10.10.1.50
+    server: 172.31.29.67
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
