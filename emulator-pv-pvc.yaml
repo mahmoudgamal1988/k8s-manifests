@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   nfs:
     path: /mnt/nfs/code/Twitter_Controlling_Emulator
-    server: 172.31.29.67
+    server: 172.31.24.178
 
 ---
 apiVersion: v1
