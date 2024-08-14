@@ -11,7 +11,7 @@ spec:
   storageClassName: nfs
   nfs:
     path: /mnt/nfs/
-    server: 172.31.29.67
+    server: 172.31.24.178
 
 ---
 
