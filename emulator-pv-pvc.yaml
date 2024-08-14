@@ -8,8 +8,8 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
+    path: /mnt/nfs/code
     server: 172.31.29.67
-    path: /mnt/nfs/codes
 
 ---
 apiVersion: v1
