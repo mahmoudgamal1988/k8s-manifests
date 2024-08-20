@@ -45,10 +45,10 @@ spec:
           mountPath: /usr/local/bin/logs
         - name: emulator-profile-volume
           mountPath: /usr/local/bin/actions
-        - name: android-data
+        - name: emulator-profile-volume 
           mountPath: /root/.android
-        - name: avd-data
-          mountPath: /root/.android/avd
+        # - name: emulator-profile-volume  
+        #   mountPath: /root/.android/avd
         securityContext:
           privileged: true
       volumes:
@@ -61,10 +61,6 @@ spec:
       - name: emulator-profile-volume
         persistentVolumeClaim:
           claimName: emulator-profile-pvc
-      - name: android-data
-        emptyDir: {}
-      - name: avd-data
-        emptyDir: {}
   podManagementPolicy: "Parallel"
   updateStrategy:
     type: RollingUpdate
