@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: android
-        image: mohamedzahran1989/android-emulator:v1
+        image: mohamedzahran1989/android-emulator:v1-head
         ports:
         - containerPort: 4725
           name: appium
