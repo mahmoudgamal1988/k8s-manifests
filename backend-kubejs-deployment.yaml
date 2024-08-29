@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: backend-kubejs-statefulset
+  labels:
+    app: backend-kubejs
+spec:
+  serviceName: "backend-kubejs"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-kubejs
+  template:
+    metadata:
+      labels:
+	app: backend-kubejs
+    spec:
+      containers:
+        - name: backend-kubejs
+          image: mohamedzahran1989/python-nodejs:python3.8-nodejs14
+          workingDir: /server
+          ports:
+            - name: backend-port
+              containerPort: 3030
+          env:
+            - name: LOGGING_LEVEL
+              value: "verbose"
+            - name: NSQ_HOST
+              value: "nsq-service.default.svc.cluster.local" # will be changed while deployment with the new NSQ service IP
+            - name: NSQ_TCP_PORT
+              value: "4150"
+            - name: NSQ_HTTP_PORT
+              value: "4151"
+            - name: NSQ_TOPICS
+              value: "facebook_controlling, facebook_scrapping, twitter_controlling, twitter_controlling_emulator, twitter_scrapping, twitter_humanization, youtube_controlling, youtube_scrapping"
+            - name: KUBE_PYTHON_URL
+              value: "http://kube-python-service-cluster.default.svc.cluster.local/k8s/deploy"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            - name: backend-kubejs-code-volume
+              mountPath: "/server"
+          command: ["yarn", "start"]
+      volumes:
+	- name: backend-kubejs-code-volume
+          persistentVolumeClaim:
+            claimName: backend-kubejs-code-pvc
