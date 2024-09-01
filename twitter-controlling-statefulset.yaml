@@ -31,7 +31,7 @@ spec:
         - name: SSL_PORT
           value: "443"
         volumeMounts:
-        - name: nfs-code-volume
+        - name: twitter-controlling-code-volume
           mountPath: /usr/local/bin/codes
         - name: logs-volume
           mountPath: /usr/local/bin/logs

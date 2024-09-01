@@ -25,8 +25,16 @@ spec:
         - name: bind-https-port
           containerPort: 443
         env:
+          - name: LOGGING_LEVEL_FILESIZE
+            value: "10000000"
+          - name: LOGGING_LEVEL_FILECOUNT
+            value: "10"
+          - name: ACCESS_LOG_FILESIZE
+            value: "10000000"
+          - name: ACCESS_LOG_FILECOUNT
+            value: "10"
           - name: MONGO_DB_URL
-            value: "mongodb://mongodb-service.default.svc.cluster.local:27017/ueyedata"
+            value: "mongodb://mongodb-service.default.svc.cluster.local:27017/ueyedata_live"
           - name: NSQ_HOST
             value: "nsq-service.default.svc.cluster.local"
           - name: NSQ_TCP_PORT
@@ -44,7 +52,7 @@ spec:
           - name: CONTAINER_NAME
             value: "backend-service-clusterip.default.svc.cluster.local"
           - name: worker_node
-            value: "192.168.10.8"
+            value: "172.17.6.11"
           - name: SUPPORTED_LANGUAGES
             value: "en, ar"
           - name: VENDOR
@@ -80,7 +88,9 @@ spec:
           - name: USE_LOCK_ACCOUNTS_ALGORITHM
             value: "true"
           - name: INSTANCE
-            value: "main-app-scheduler"
+            value: "scheduler"
+          - name: KUBE_PYTHON_URL
+            value: "http://kube-python-service-cluster.default.svc.cluster.local/k8s/statefulsets/scale"
           - name: MY_POD_NAME
             valueFrom:
               fieldRef:
@@ -93,12 +103,12 @@ spec:
       - name: backend-code-volume
         persistentVolumeClaim:
           claimName: backend-code-pvc
-      # nodeSelector:
-      #   kubernetes.io/hostname: avatars-worker-11
-      # tolerations:  # This section is what you add for the toleration
-      # - key: "key"
-      #   operator: "Equal"
-      #   value: "value"
-      #   effect: "NoSchedule"
-      # imagePullSecrets:
-      # - name: myregistrykey
+      nodeSelector:
+        kubernetes.io/hostname: avatars-worker-11
+      tolerations:  # This section is what you add for the toleration
+      - key: "key"
+        operator: "Equal"
+        value: "value"
+        effect: "NoSchedule"
+      imagePullSecrets:
+      - name: myregistrykey

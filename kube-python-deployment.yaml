@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
       - name: kube-python
-        image: mohamedzahran1989/kpythonnew:new9
+        image: mohamedzahran1989/kpythonnew:new29
         imagePullPolicy: Always
         env:
         - name: NFS_SERVER_IP
-          value: "192.168.10.7"  # Replace with your NFS server IP
+          value: "172.17.6.50"  # Replace with your NFS server IP
         ports:
         - containerPort: 5000
         volumeMounts:
@@ -36,12 +36,12 @@ spec:
       - name: nfs-storage
         persistentVolumeClaim:
           claimName: nfs-pvc
-      # nodeSelector:
-      #   kubernetes.io/hostname: avatars-worker-11
-      # tolerations:  # This section is what you add for the toleration
-      # - key: "key"
-      #   operator: "Equal"
-      #   value: "value"
-      #   effect: "NoSchedule"
-      # imagePullSecrets:
-      # - name: myregistrykey
+      nodeSelector:
+        kubernetes.io/hostname: avatars-worker-11
+      tolerations:  # This section is what you add for the toleration
+      - key: "key"
+        operator: "Equal"
+        value: "value"
+        effect: "NoSchedule"
+      imagePullSecrets:
+      - name: myregistrykey

@@ -28,13 +28,13 @@ spec:
           mountPath: /data/db
         - name: db-backup-storage
           mountPath: /backup
-      # nodeSelector:
-      #   kubernetes.io/hostname: avatars-worker-11
-      # tolerations:  # This section is what you add for the toleration
-      # - key: "key"
-      #   operator: "Equal"
-      #   value: "value"
-       # effect: "NoSchedule"
+      nodeSelector:
+        kubernetes.io/hostname: avatars-worker-11
+      tolerations:  # This section is what you add for the toleration
+      - key: "key"
+        operator: "Equal"
+        value: "value"
+        effect: "NoSchedule"
       volumes:
       - name: db-storage
         persistentVolumeClaim:
