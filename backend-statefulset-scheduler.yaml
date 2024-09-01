@@ -87,6 +87,8 @@ spec:
             value: "migrations, scheduler"
           - name: USE_LOCK_ACCOUNTS_ALGORITHM
             value: "true"
+          - name: signals_interval_seconds
+            value: "60"
           - name: INSTANCE
             value: "scheduler"
           - name: KUBE_PYTHON_URL
